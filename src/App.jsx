@@ -204,7 +204,7 @@ export default function App() {
       saveCredits(remaining);
       setCreditsState(remaining);
       setResult(parsed);
-    } catch { setError("Audit failed — please try again."); }
+    } catch(e) { setError("Error: " + JSON.stringify(e.message)); }
     finally { setLoading(false); }
   };
 
