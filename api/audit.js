@@ -15,12 +15,12 @@ export default async function handler(req, res) {
     });
 
     const text = await response.text();
-try {
-  const data = JSON.parse(text);
-  return res.status(200).json(data);
-} catch(e) {
-  return res.status(500).json({ error: "Anthropic returned: " + text });
-}
+    return res.status(200).json({ 
+      status: response.status, 
+      statusText: response.statusText,
+      raw: text 
+    });
+
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
