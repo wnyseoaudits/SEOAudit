@@ -197,14 +197,15 @@ export default function App() {
           messages:[{ role:"user", content:`Audit this website content:\n\n${content}` }]
         })
       });
-      const data = await res.json();
-      const raw = data.content?.find(b=>b.type==="text")?.text || "";
-      const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
+      const text = await res.text();
+const data = JSON.parse(text);
+const raw = data.content?.find(b=>b.type==="text")?.text || "";
+const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
       const remaining = getCredits() - 1;
       saveCredits(remaining);
       setCreditsState(remaining);
       setResult(parsed);
-    } catch(e) { setError("Error: " + JSON.stringify(e.message)); }
+    } catch(e) { setError("Error: " + e.message + " | " + JSON.stringify(e)); }
     finally { setLoading(false); }
   };
 
