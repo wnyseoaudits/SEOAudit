@@ -192,7 +192,7 @@ export default function App() {
       const res = await fetch("/api/audit", {
         method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
-          model:"claude-sonnet-4-5", max_tokens:4000,
+          model:"claude-sonnet-4-5", max_tokens:4000, temperature:0,
           system:systemPrompt,
           messages:[{ role:"user", content:`Audit this website content:\n\n${content}` }]
         })
